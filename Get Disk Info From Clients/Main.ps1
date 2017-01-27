@@ -3,15 +3,15 @@
 ## Change this
 $OU = "OU=Netlab,OU=Datamaskiner,OU=IKT-FAG,DC=IKT-FAG,DC=no"
 $CsvPath = "C:\Users\admin\Desktop\DiskSpaceClients.csv"
-###
+##
 
 $Ping = New-Object System.Net.NetworkInformation.Ping
 
-$NETLAB = Get-ADComputer -Filter * -SearchBase $OU | select DnsHostName
+$Computers = Get-ADComputer -Filter * -SearchBase $OU | select DnsHostName
 
 $Col = @()
 
-foreach ($DNSHostName in $NETLAB) {
+foreach ($DNSHostName in $Computers) {
 
     $Hostname = $DNSHostName.DnsHostName   
 
@@ -55,7 +55,8 @@ foreach ($DNSHostName in $NETLAB) {
 }
 
 $Col
-
-$Col | `
-    select Hostname, GbTotal, GbUsed, GbFree, Status | `
+<#
+$Col |
+    select Hostname, GbTotal, GbUsed, GbFree, Status |
         Export-Csv -Path  -Delimiter ";" -Force -NoTypeInformation
+#>

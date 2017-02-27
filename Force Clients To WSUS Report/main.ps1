@@ -1,8 +1,10 @@
 ﻿Import-Module ActiveDirectory
+$Cred = Get-Credential
 
+while(1)
+{
 ## These need to be changed
 $Computers = Get-ADGroupMember -Identity Elevmaskiner
-$Cred = Get-Credential
 $DomainName = ".ikt-fag.no"
 
 $Ping = New-Object System.Net.NetworkInformation.Ping
@@ -38,4 +40,5 @@ foreach ($Computer in $Computers)
 
         Get-Service -Name wuauserv | Start-Service
     } -ErrorAction Continue
+}
 }
